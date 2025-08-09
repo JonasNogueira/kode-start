@@ -1,57 +1,74 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+
+import 'package:rick_morty/theme/app_images.dart';
 
 class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
-  const AppBarWidget({super.key});
+  final bool isSecondPage;
+
+  const AppBarWidget({super.key, this.isSecondPage = false});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Color(0xFF1C1B1F),
-      child: SafeArea(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Icon(Icons.menu, color: Colors.white, size: 25),
-            ),
-
-            Padding(
-              padding: const EdgeInsets.fromLTRB(8, 16, 8, 16),
-              child: Column(
-                children: [
-                  Image.asset(
-                    'assets/logo.png',
-                    width: 115,
-                    height: 76.98668670654297,
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+      value: SystemUiOverlayStyle.dark,
+      child: Container(
+        color: const Color(0xFF1C1B1F),
+        child: SafeArea(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: GestureDetector(
+                  onTap: () {
+                    if (isSecondPage) {
+                      Navigator.pop(context);
+                    } else {
+                      // menu action?
+                    }
+                  },
+                  child: Icon(
+                    isSecondPage ? Icons.arrow_back : Icons.menu,
+                    color: Colors.white,
+                    size: 25,
                   ),
-                  Text(
-                    'RICK AND MORTY API',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 14.5,
-                      letterSpacing: 1.5,
+                ),
+              ),
+
+              Padding(
+                padding: const EdgeInsets.fromLTRB(8, 16, 8, 16),
+                child: Column(
+                  children: [
+                    Image.asset(AppImages.logo, width: 115, height: 76.99),
+                    const Text(
+                      'RICK AND MORTY API',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 14.5,
+                        letterSpacing: 1.5,
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
 
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Icon(
-                Icons.account_circle,
-                color: Colors.white,
-                size: 31.46,
+              const Padding(
+                padding: EdgeInsets.all(16.0),
+                child: ImageIcon(
+                  AssetImage(AppImages.icon),
+                  color: Colors.white,
+                  size: 31.46,
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
   }
 
   @override
-  Size get preferredSize => Size.fromHeight(130.92);
+  Size get preferredSize => const Size.fromHeight(130.92);
 }

@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:rick_morty/widgets/app_bar_widget.dart';
-import 'package:rick_morty/widgets/search_bar_widget.dart';
+
+import 'pages/home_page.dart';
+import 'pages/details_page.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const RickMortyApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class RickMortyApp extends StatelessWidget {
+  const RickMortyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -19,35 +20,27 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.green),
         textTheme: GoogleFonts.latoTextTheme(Theme.of(context).textTheme),
       ),
-      home: const HomeScreen(),
-    );
-  }
-}
+      initialRoute: CharacterHomePage.routeId,
+      onGenerateRoute: (settings) {
+        switch (settings.name) {
+          case CharacterHomePage.routeId:
+            return MaterialPageRoute(
+              settings: settings,
+              builder: (context) => const CharacterHomePage(),
+            );
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+          case DetailsPage.routeId:
+            final characterId = settings.arguments as int;
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBarWidget(),
-      body: Container(
-        color: Colors.black,
-        width: double.infinity,
-        height: double.infinity,
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            children: [
-              const SearchBarWidget(),
+            return MaterialPageRoute(
+              settings: settings,
+              builder: (context) => DetailsPage(characterId: characterId),
+            );
 
-              const SizedBox(height: 8),
-
-              Expanded(child: Placeholder()),
-            ],
-          ),
-        ),
-      ),
+          default:
+            return null;
+        }
+      },
     );
   }
 }
