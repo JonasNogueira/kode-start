@@ -13,10 +13,10 @@ class DetailsPage extends StatefulWidget {
   final int characterId;
 
   @override
-  _DetailsPageState createState() => _DetailsPageState();
+  DetailsPageState createState() => DetailsPageState();
 }
 
-class _DetailsPageState extends State<DetailsPage> {
+class DetailsPageState extends State<DetailsPage> {
   Future<DetailedCharacter>? character;
 
   @override

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rick_morty/theme/app_colors.dart';
 
 class SearchBarWidget extends StatelessWidget {
   final String hint;
@@ -19,10 +20,7 @@ class SearchBarWidget extends StatelessWidget {
       child: SearchBar(
         controller: controller,
         hintText: hint,
-        leading: const Icon(
-          Icons.search,
-          color: Color.fromARGB(255, 72, 137, 167),
-        ),
+        leading: Icon(Icons.search, color: AppColors.blue),
         trailing: [
           if (controller.text.isNotEmpty)
             IconButton(
@@ -35,17 +33,15 @@ class SearchBarWidget extends StatelessWidget {
         ],
         onChanged: onChanged,
         backgroundColor: WidgetStateProperty.all(
-          const Color.fromARGB(22, 255, 255, 255),
+          AppColors.white.withValues(alpha: 0.1),
         ),
         hintStyle: WidgetStateProperty.all(
-          const TextStyle(
+          TextStyle(
             fontSize: 13,
-            color: Color.fromARGB(45, 255, 255, 255),
+            color: AppColors.white.withValues(alpha: 0.3),
           ),
         ),
-        textStyle: WidgetStateProperty.all(
-          const TextStyle(color: Colors.white),
-        ),
+        textStyle: WidgetStateProperty.all(TextStyle(color: AppColors.white)),
         padding: WidgetStateProperty.all(
           const EdgeInsets.symmetric(horizontal: 16.0),
         ),

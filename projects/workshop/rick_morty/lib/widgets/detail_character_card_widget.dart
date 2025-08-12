@@ -10,11 +10,11 @@ class DetailedCharacterCard extends StatelessWidget {
   Color _getStatusColor(String status) {
     switch (status.toLowerCase()) {
       case 'alive':
-        return Colors.green;
+        return AppColors.green;
       case 'dead':
-        return Colors.red;
+        return AppColors.red;
       default:
-        return Colors.grey;
+        return AppColors.grey;
     }
   }
 
@@ -62,7 +62,7 @@ class DetailedCharacterCard extends StatelessWidget {
                           Text(
                             'First seen in:',
                             style: TextStyle(
-                              color: AppColors.white.withOpacity(0.6),
+                              color: AppColors.white.withValues(alpha: 0.6),
                               fontSize: 12,
                             ),
                           ),
@@ -85,7 +85,7 @@ class DetailedCharacterCard extends StatelessWidget {
                           Text(
                             'Last known location:',
                             style: TextStyle(
-                              color: AppColors.white.withOpacity(0.6),
+                              color: AppColors.white.withValues(alpha: 0.6),
                               fontSize: 12,
                             ),
                           ),
@@ -115,7 +115,7 @@ class DetailedCharacterCard extends StatelessWidget {
                         Text(
                           'Gender:',
                           style: TextStyle(
-                            color: AppColors.white.withOpacity(0.6),
+                            color: AppColors.white.withValues(alpha: 0.6),
                             fontSize: 12,
                           ),
                         ),
@@ -134,7 +134,7 @@ class DetailedCharacterCard extends StatelessWidget {
                         Text(
                           'Origin:',
                           style: TextStyle(
-                            color: AppColors.white.withOpacity(0.6),
+                            color: AppColors.white.withValues(alpha: 0.6),
                             fontSize: 12,
                           ),
                         ),

@@ -38,7 +38,7 @@ class StatisticsCard extends StatelessWidget {
                   (e) => Text(
                     '${e.key}: ${e.value}',
                     style: TextStyle(
-                      color: AppColors.white.withOpacity(0.8),
+                      color: AppColors.white.withValues(alpha: 0.8),
                       fontSize: 14,
                     ),
                     textAlign: TextAlign.center,

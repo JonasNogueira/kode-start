@@ -38,7 +38,7 @@ class EpisodeCardWidget extends StatelessWidget {
                 'Episode: ${episode.episode}',
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  color: AppColors.white.withOpacity(0.7),
+                  color: AppColors.white.withValues(alpha: 0.6),
                   fontSize: 11,
                 ),
               ),
@@ -46,7 +46,7 @@ class EpisodeCardWidget extends StatelessWidget {
                 'Air Date: ${episode.airDate}',
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  color: AppColors.white.withOpacity(0.7),
+                  color: AppColors.white.withValues(alpha: 0.6),
                   fontSize: 11,
                 ),
               ),

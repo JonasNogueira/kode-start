@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:rick_morty/theme/app_colors.dart';
 
 import 'package:rick_morty/theme/app_images.dart';
 
@@ -32,7 +33,7 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
                     },
                     child: Icon(
                       isSecondPage ? Icons.arrow_back : Icons.menu,
-                      color: Colors.white,
+                      color: AppColors.white,
                       size: 25,
                     ),
                   ),
@@ -44,10 +45,10 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
                 child: Column(
                   children: [
                     Image.asset(AppImages.logo, width: 115, height: 76.99),
-                    const Text(
+                    Text(
                       'RICK AND MORTY API',
                       style: TextStyle(
-                        color: Colors.white,
+                        color: AppColors.white,
                         fontSize: 14.5,
                         letterSpacing: 1.5,
                       ),
@@ -56,11 +57,11 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
                 ),
               ),
 
-              const Padding(
-                padding: EdgeInsets.all(16.0),
+              Padding(
+                padding: const EdgeInsets.all(16.0),
                 child: ImageIcon(
-                  AssetImage(AppImages.icon),
-                  color: Colors.white,
+                  const AssetImage(AppImages.icon),
+                  color: AppColors.white,
                   size: 31.46,
                 ),
               ),
