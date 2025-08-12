@@ -7,7 +7,34 @@ class CharacterRepository {
     BaseOptions(baseUrl: 'https://rickandmortyapi.com/api/'),
   );
 
-  static Future<PaginatedCharacters> getCharacters({String? name}) async {
+  static Future<List<DetailedCharacter>> getCharacters({String? name}) async {
+    final List<DetailedCharacter> allCharacters = [];
+    int page = 1;
+    bool hasNext = true;
+
+    while (hasNext) {
+      final queryParameters = {'page': page};
+      if (name != null && name.isNotEmpty) {
+        queryParameters['name'] = name as int;
+      }
+
+      final response = await _dio.get(
+        'character',
+        queryParameters: queryParameters,
+      );
+
+      final data = response.data;
+      final results = data['results'] as List;
+      allCharacters.addAll(results.map((c) => DetailedCharacter.fromJson(c)));
+
+      hasNext = data['info']['next'] != null;
+      page++;
+    }
+
+    return allCharacters;
+  }
+
+  static Future<PaginatedCharacters> getCharactersSearch({String? name}) async {
     final queryParameters = <String, dynamic>{};
 
     if (name != null && name.isNotEmpty) {
@@ -23,7 +50,7 @@ class CharacterRepository {
   }
 
   static Future<DetailedCharacter> getCharacterDetails(int characterId) async {
-    final response = await _dio.get('/character/$characterId');
+    final response = await _dio.get('character/$characterId');
     final characterData = response.data;
 
     String? firstEpisodeName;
@@ -31,7 +58,6 @@ class CharacterRepository {
     if (characterData['episode'] != null &&
         characterData['episode'].isNotEmpty) {
       final firstEpisodeUrl = characterData['episode'][0];
-
       final episodeResponse = await _dio.get(firstEpisodeUrl);
       firstEpisodeName = episodeResponse.data['name'];
     }

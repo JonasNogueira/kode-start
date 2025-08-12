@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$">
+      <excludeFolder url="file://$MODULE_DIR$/projects/workshop/flutter_counter_example/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/projects/workshop/flutter_counter_example/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/projects/workshop/flutter_counter_example/build" />
+      <excludeFolder url="file://$MODULE_DIR$/projects/workshop/kode_start_imc/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/projects/workshop/kode_start_imc/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/projects/workshop/kode_start_imc/build" />
+      <excludeFolder url="file://$MODULE_DIR$/projects/workshop/kode_start_tmdb/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/projects/workshop/kode_start_tmdb/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/projects/workshop/kode_start_tmdb/build" />
+      <excludeFolder url="file://$MODULE_DIR$/projects/workshop/rick_morty/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/projects/workshop/rick_morty/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/projects/workshop/rick_morty/build" />
+      <excludeFolder url="file://$MODULE_DIR$/projects/workshop/rick_morty/linux/flutter/ephemeral/.plugin_symlinks/audioplayers_linux/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/projects/workshop/rick_morty/linux/flutter/ephemeral/.plugin_symlinks/audioplayers_linux/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/projects/workshop/rick_morty/linux/flutter/ephemeral/.plugin_symlinks/audioplayers_linux/build" />
+      <excludeFolder url="file://$MODULE_DIR$/projects/workshop/rick_morty/linux/flutter/ephemeral/.plugin_symlinks/path_provider_linux/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/projects/workshop/rick_morty/linux/flutter/ephemeral/.plugin_symlinks/path_provider_linux/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/projects/workshop/rick_morty/linux/flutter/ephemeral/.plugin_symlinks/path_provider_linux/build" />
+      <excludeFolder url="file://$MODULE_DIR$/projects/workshop/rick_morty/linux/flutter/ephemeral/.plugin_symlinks/path_provider_linux/example/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/projects/workshop/rick_morty/linux/flutter/ephemeral/.plugin_symlinks/path_provider_linux/example/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/projects/workshop/rick_morty/linux/flutter/ephemeral/.plugin_symlinks/path_provider_linux/example/build" />
+      <excludeFolder url="file://$MODULE_DIR$/projects/workshop/rick_morty/windows/flutter/ephemeral/.plugin_symlinks/audioplayers_windows/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/projects/workshop/rick_morty/windows/flutter/ephemeral/.plugin_symlinks/audioplayers_windows/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/projects/workshop/rick_morty/windows/flutter/ephemeral/.plugin_symlinks/audioplayers_windows/build" />
+      <excludeFolder url="file://$MODULE_DIR$/projects/workshop/rick_morty/windows/flutter/ephemeral/.plugin_symlinks/path_provider_windows/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/projects/workshop/rick_morty/windows/flutter/ephemeral/.plugin_symlinks/path_provider_windows/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/projects/workshop/rick_morty/windows/flutter/ephemeral/.plugin_symlinks/path_provider_windows/build" />
+      <excludeFolder url="file://$MODULE_DIR$/projects/workshop/rick_morty/windows/flutter/ephemeral/.plugin_symlinks/path_provider_windows/example/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/projects/workshop/rick_morty/windows/flutter/ephemeral/.plugin_symlinks/path_provider_windows/example/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/projects/workshop/rick_morty/windows/flutter/ephemeral/.plugin_symlinks/path_provider_windows/example/build" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+</module>

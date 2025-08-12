@@ -21,18 +21,20 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
             children: [
               Padding(
                 padding: const EdgeInsets.all(16.0),
-                child: GestureDetector(
-                  onTap: () {
-                    if (isSecondPage) {
-                      Navigator.pop(context);
-                    } else {
-                      // menu action?
-                    }
-                  },
-                  child: Icon(
-                    isSecondPage ? Icons.arrow_back : Icons.menu,
-                    color: Colors.white,
-                    size: 25,
+                child: Builder(
+                  builder: (context) => GestureDetector(
+                    onTap: () {
+                      if (isSecondPage) {
+                        Navigator.pop(context);
+                      } else {
+                        Scaffold.of(context).openDrawer();
+                      }
+                    },
+                    child: Icon(
+                      isSecondPage ? Icons.arrow_back : Icons.menu,
+                      color: Colors.white,
+                      size: 25,
+                    ),
                   ),
                 ),
               ),

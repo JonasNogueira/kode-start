@@ -1,44 +1,35 @@
 import 'package:flutter/material.dart';
-import 'package:rick_morty/models/detailed_character_model.dart';
-import 'package:rick_morty/widgets/app_bar_widget.dart';
-import 'package:rick_morty/widgets/search_bar_widget.dart';
-import 'package:rick_morty/widgets/drawer_widget.dart';
-import 'package:rick_morty/widgets/character_list_widget.dart';
-import 'package:rick_morty/repositories/character_repository.dart';
-
+import 'package:rick_morty/models/paginated_episodes_model.dart';
+import 'package:rick_morty/repositories/episodes_repository.dart';
 import 'package:rick_morty/theme/app_colors.dart';
+import 'package:rick_morty/widgets/app_bar_widget.dart';
+import 'package:rick_morty/widgets/drawer_widget.dart';
+import 'package:rick_morty/widgets/episode_list_widget.dart';
+import 'package:rick_morty/widgets/search_bar_widget.dart';
 
-class CharacterHomePage extends StatefulWidget {
-  static const routeId = '/';
-  const CharacterHomePage({super.key});
+class EpisodesHomePage extends StatefulWidget {
+  static const routeId = '/episodes';
+  const EpisodesHomePage({super.key});
 
   @override
-  State<CharacterHomePage> createState() => _CharacterHomePageState();
+  State<EpisodesHomePage> createState() => _EpisodesHomePageState();
 }
 
-class _CharacterHomePageState extends State<CharacterHomePage> {
-  Future<List<DetailedCharacter>>? characters;
+class _EpisodesHomePageState extends State<EpisodesHomePage> {
+  Future<PaginatedEpisodes>? episodes;
   final TextEditingController _searchController = TextEditingController();
 
-  void _fetchCharacters([String name = '']) {
+  void _fetchEpisodes([String name = '']) {
     setState(() {
-      characters = CharacterRepository.getCharactersSearch(
-        name: name,
-      ).then((paginated) => paginated.results);
+      episodes = EpisodeRepository.getEpisodes(name: name);
     });
   }
 
   @override
   void initState() {
     super.initState();
-    _fetchCharacters();
+    _fetchEpisodes();
     _searchController.addListener(() => setState(() {}));
-  }
-
-  @override
-  void dispose() {
-    _searchController.dispose();
-    super.dispose();
   }
 
   @override
@@ -53,19 +44,19 @@ class _CharacterHomePageState extends State<CharacterHomePage> {
             padding: const EdgeInsets.all(8.0),
             child: SearchBarWidget(
               controller: _searchController,
-              onChanged: (value) => _fetchCharacters(value),
+              onChanged: (value) => _fetchEpisodes(value),
             ),
           ),
           Expanded(
-            child: FutureBuilder<List<DetailedCharacter>>(
-              future: characters,
+            child: FutureBuilder<PaginatedEpisodes>(
+              future: episodes,
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
-                  return CharacterListWidget(characters: snapshot.data!);
+                  return EpisodeListWidget(episodes: snapshot.data!.results);
                 } else if (snapshot.hasError) {
                   return Center(
                     child: Text(
-                      "No characters found.",
+                      "No episodes found.",
                       style: TextStyle(color: AppColors.white),
                     ),
                   );

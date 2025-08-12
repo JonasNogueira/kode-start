@@ -77,7 +77,7 @@ class DetailedCharacterCard extends StatelessWidget {
                         ],
                       ),
                     ),
-                    const SizedBox(width: 8), // espaço entre colunas
+                    const SizedBox(width: 8),
                     Flexible(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.end,

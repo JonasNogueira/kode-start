@@ -1,37 +1,35 @@
 import 'package:flutter/material.dart';
-import 'package:rick_morty/models/detailed_character_model.dart';
 import 'package:rick_morty/widgets/app_bar_widget.dart';
 import 'package:rick_morty/widgets/search_bar_widget.dart';
 import 'package:rick_morty/widgets/drawer_widget.dart';
-import 'package:rick_morty/widgets/character_list_widget.dart';
-import 'package:rick_morty/repositories/character_repository.dart';
-
+import 'package:rick_morty/widgets/location_list_widget.dart';
+import 'package:rick_morty/repositories/location_repository.dart';
+import 'package:rick_morty/models/paginated_locations_model.dart';
 import 'package:rick_morty/theme/app_colors.dart';
 
-class CharacterHomePage extends StatefulWidget {
-  static const routeId = '/';
-  const CharacterHomePage({super.key});
+class LocationsHomePage extends StatefulWidget {
+  static const routeId = '/locations';
+
+  const LocationsHomePage({super.key});
 
   @override
-  State<CharacterHomePage> createState() => _CharacterHomePageState();
+  State<LocationsHomePage> createState() => _LocationsHomePageState();
 }
 
-class _CharacterHomePageState extends State<CharacterHomePage> {
-  Future<List<DetailedCharacter>>? characters;
+class _LocationsHomePageState extends State<LocationsHomePage> {
+  Future<PaginatedLocations>? locations;
   final TextEditingController _searchController = TextEditingController();
 
-  void _fetchCharacters([String name = '']) {
+  void _fetchLocations([String name = '']) {
     setState(() {
-      characters = CharacterRepository.getCharactersSearch(
-        name: name,
-      ).then((paginated) => paginated.results);
+      locations = LocationRepository.getLocations(name: name);
     });
   }
 
   @override
   void initState() {
     super.initState();
-    _fetchCharacters();
+    _fetchLocations();
     _searchController.addListener(() => setState(() {}));
   }
 
@@ -53,19 +51,20 @@ class _CharacterHomePageState extends State<CharacterHomePage> {
             padding: const EdgeInsets.all(8.0),
             child: SearchBarWidget(
               controller: _searchController,
-              onChanged: (value) => _fetchCharacters(value),
+              onChanged: (value) => _fetchLocations(value),
             ),
           ),
+
           Expanded(
-            child: FutureBuilder<List<DetailedCharacter>>(
-              future: characters,
+            child: FutureBuilder<PaginatedLocations>(
+              future: locations,
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
-                  return CharacterListWidget(characters: snapshot.data!);
+                  return LocationListWidget(locations: snapshot.data!.results);
                 } else if (snapshot.hasError) {
                   return Center(
                     child: Text(
-                      "No characters found.",
+                      "No locations found.",
                       style: TextStyle(color: AppColors.white),
                     ),
                   );

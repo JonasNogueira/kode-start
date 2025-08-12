@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:rick_morty/pages/episodes_page.dart';
+import 'package:rick_morty/pages/locations_page.dart';
+import 'package:rick_morty/pages/statistics_page.dart';
+import 'package:rick_morty/theme/app_colors.dart';
 
 import 'pages/home_page.dart';
 import 'pages/details_page.dart';
@@ -17,7 +21,9 @@ class RickMortyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Rick and Morty API',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.green),
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: AppColors.primaryColorDark,
+        ),
         textTheme: GoogleFonts.latoTextTheme(Theme.of(context).textTheme),
       ),
       initialRoute: CharacterHomePage.routeId,
@@ -35,6 +41,24 @@ class RickMortyApp extends StatelessWidget {
             return MaterialPageRoute(
               settings: settings,
               builder: (context) => DetailsPage(characterId: characterId),
+            );
+
+          case LocationsHomePage.routeId:
+            return MaterialPageRoute(
+              settings: settings,
+              builder: (context) => const LocationsHomePage(),
+            );
+
+          case EpisodesHomePage.routeId:
+            return MaterialPageRoute(
+              settings: settings,
+              builder: (context) => const EpisodesHomePage(),
+            );
+
+          case StatisticsPage.routeId:
+            return MaterialPageRoute(
+              settings: settings,
+              builder: (context) => const StatisticsPage(),
             );
 
           default:
