@@ -5,7 +5,6 @@ import 'package:rick_morty/widgets/search_bar_widget.dart';
 import 'package:rick_morty/widgets/drawer_widget.dart';
 import 'package:rick_morty/widgets/character_list_widget.dart';
 import 'package:rick_morty/repositories/character_repository.dart';
-
 import 'package:rick_morty/theme/app_colors.dart';
 
 class CharacterHomePage extends StatefulWidget {
@@ -19,12 +18,14 @@ class CharacterHomePage extends StatefulWidget {
 class _CharacterHomePageState extends State<CharacterHomePage> {
   Future<List<DetailedCharacter>>? characters;
   final TextEditingController _searchController = TextEditingController();
+  final ScrollController _scrollController = ScrollController();
+  bool _showScrollToTopButton = false;
 
   void _fetchCharacters([String name = '']) {
     setState(() {
-      characters = CharacterRepository.getCharactersSearch(
-        name: name,
-      ).then((paginated) => paginated.results);
+      characters = CharacterRepository.getCharacters(
+        name: name.isNotEmpty ? name.toLowerCase() : null,
+      );
     });
   }
 
@@ -33,12 +34,29 @@ class _CharacterHomePageState extends State<CharacterHomePage> {
     super.initState();
     _fetchCharacters();
     _searchController.addListener(() => setState(() {}));
+
+    _scrollController.addListener(() {
+      if (_scrollController.offset > 300 && !_showScrollToTopButton) {
+        setState(() => _showScrollToTopButton = true);
+      } else if (_scrollController.offset <= 300 && _showScrollToTopButton) {
+        setState(() => _showScrollToTopButton = false);
+      }
+    });
   }
 
   @override
   void dispose() {
     _searchController.dispose();
+    _scrollController.dispose();
     super.dispose();
+  }
+
+  void _scrollToTop() {
+    _scrollController.animateTo(
+      0,
+      duration: const Duration(milliseconds: 500),
+      curve: Curves.easeOut,
+    );
   }
 
   @override
@@ -61,7 +79,10 @@ class _CharacterHomePageState extends State<CharacterHomePage> {
               future: characters,
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
-                  return CharacterListWidget(characters: snapshot.data!);
+                  return CharacterListWidget(
+                    characters: snapshot.data!,
+                    scrollController: _scrollController,
+                  );
                 } else if (snapshot.hasError) {
                   return Center(
                     child: Text(
@@ -77,6 +98,16 @@ class _CharacterHomePageState extends State<CharacterHomePage> {
           ),
         ],
       ),
+      floatingActionButton: _showScrollToTopButton
+          ? FloatingActionButton(
+              onPressed: _scrollToTop,
+
+              backgroundColor: AppColors.primaryColorLight.withValues(
+                alpha: 0.7,
+              ),
+              child: const Icon(Icons.arrow_upward),
+            )
+          : null,
     );
   }
 }

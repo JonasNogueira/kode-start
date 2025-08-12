@@ -44,6 +44,8 @@ class EpisodeCardWidget extends StatelessWidget {
               ),
               Text(
                 'Air Date: ${episode.airDate}',
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   color: AppColors.white.withValues(alpha: 0.6),

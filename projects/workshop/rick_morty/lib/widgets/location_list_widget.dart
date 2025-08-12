@@ -4,12 +4,18 @@ import 'package:rick_morty/widgets/location_card_widget.dart';
 
 class LocationListWidget extends StatelessWidget {
   final List<DetailedLocation> locations;
+  final ScrollController scrollController;
 
-  const LocationListWidget({super.key, required this.locations});
+  const LocationListWidget({
+    super.key,
+    required this.locations,
+    required this.scrollController,
+  });
 
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
+      controller: scrollController,
       padding: const EdgeInsets.all(8),
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,

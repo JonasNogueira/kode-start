@@ -13,9 +13,9 @@ class CharacterRepository {
     bool hasNext = true;
 
     while (hasNext) {
-      final queryParameters = {'page': page};
+      final queryParameters = <String, dynamic>{'page': page};
       if (name != null && name.isNotEmpty) {
-        queryParameters['name'] = name as int;
+        queryParameters['name'] = name;
       }
 
       final response = await _dio.get(

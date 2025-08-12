@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:rick_morty/models/paginated_episodes_model.dart';
-import 'package:rick_morty/repositories/episodes_repository.dart';
-import 'package:rick_morty/theme/app_colors.dart';
+
+import 'package:rick_morty/models/episode_model.dart';
 import 'package:rick_morty/widgets/app_bar_widget.dart';
+import 'package:rick_morty/widgets/search_bar_widget.dart';
 import 'package:rick_morty/widgets/drawer_widget.dart';
 import 'package:rick_morty/widgets/episode_list_widget.dart';
-import 'package:rick_morty/widgets/search_bar_widget.dart';
+import 'package:rick_morty/repositories/episodes_repository.dart';
+import 'package:rick_morty/theme/app_colors.dart';
 
 class EpisodesHomePage extends StatefulWidget {
   static const routeId = '/episodes';
@@ -16,12 +17,16 @@ class EpisodesHomePage extends StatefulWidget {
 }
 
 class _EpisodesHomePageState extends State<EpisodesHomePage> {
-  Future<PaginatedEpisodes>? episodes;
+  Future<List<DetailedEpisode>>? episodes;
   final TextEditingController _searchController = TextEditingController();
+  final ScrollController _scrollController = ScrollController();
+  bool _showScrollToTopButton = false;
 
   void _fetchEpisodes([String name = '']) {
     setState(() {
-      episodes = EpisodeRepository.getEpisodes(name: name);
+      episodes = EpisodeRepository.getAllEpisodes(
+        name: name.isNotEmpty ? name.toLowerCase() : null,
+      );
     });
   }
 
@@ -30,6 +35,29 @@ class _EpisodesHomePageState extends State<EpisodesHomePage> {
     super.initState();
     _fetchEpisodes();
     _searchController.addListener(() => setState(() {}));
+
+    _scrollController.addListener(() {
+      if (_scrollController.offset > 300 && !_showScrollToTopButton) {
+        setState(() => _showScrollToTopButton = true);
+      } else if (_scrollController.offset <= 300 && _showScrollToTopButton) {
+        setState(() => _showScrollToTopButton = false);
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _searchController.dispose();
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  void _scrollToTop() {
+    _scrollController.animateTo(
+      0,
+      duration: const Duration(milliseconds: 500),
+      curve: Curves.easeOut,
+    );
   }
 
   @override
@@ -48,11 +76,14 @@ class _EpisodesHomePageState extends State<EpisodesHomePage> {
             ),
           ),
           Expanded(
-            child: FutureBuilder<PaginatedEpisodes>(
+            child: FutureBuilder<List<DetailedEpisode>>(
               future: episodes,
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
-                  return EpisodeListWidget(episodes: snapshot.data!.results);
+                  return EpisodeListWidget(
+                    episodes: snapshot.data!,
+                    scrollController: _scrollController,
+                  );
                 } else if (snapshot.hasError) {
                   return Center(
                     child: Text(
@@ -68,6 +99,13 @@ class _EpisodesHomePageState extends State<EpisodesHomePage> {
           ),
         ],
       ),
+      floatingActionButton: _showScrollToTopButton
+          ? FloatingActionButton(
+              onPressed: _scrollToTop,
+              backgroundColor: AppColors.primaryColorLight.withAlpha(180),
+              child: const Icon(Icons.arrow_upward),
+            )
+          : null,
     );
   }
 }

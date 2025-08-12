@@ -17,7 +17,7 @@ class LocationCardWidget extends StatelessWidget {
         borderRadius: BorderRadius.circular(10),
         onTap: onTap,
         child: Padding(
-          padding: const EdgeInsets.all(2),
+          padding: const EdgeInsets.all(1),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -36,6 +36,8 @@ class LocationCardWidget extends StatelessWidget {
               const SizedBox(height: 6),
               Text(
                 'Type: ${location.type}',
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   color: AppColors.white.withValues(alpha: 0.6),
@@ -44,6 +46,8 @@ class LocationCardWidget extends StatelessWidget {
               ),
               Text(
                 'Dimension: ${location.dimension}',
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   color: AppColors.white.withValues(alpha: 0.6),

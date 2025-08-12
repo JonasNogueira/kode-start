@@ -2,22 +2,28 @@ import 'package:flutter/material.dart';
 import 'package:audioplayers/audioplayers.dart';
 
 import 'package:rick_morty/models/detailed_character_model.dart';
-
 import 'package:rick_morty/widgets/character_card_widget.dart';
 import 'package:rick_morty/pages/details_page.dart';
 
 class CharacterListWidget extends StatelessWidget {
   final List<DetailedCharacter> characters;
+  final ScrollController scrollController;
 
-  const CharacterListWidget({super.key, required this.characters});
+  const CharacterListWidget({
+    super.key,
+    required this.characters,
+    required this.scrollController,
+  });
 
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
+      controller: scrollController,
       padding: const EdgeInsets.symmetric(vertical: 7.5),
       itemCount: characters.length,
       itemBuilder: (context, index) {
         final character = characters[index];
+
         return CharacterCard(
           character: character,
           onTap: () {
